@@ -17,7 +17,7 @@ export default function HeaderSearchBar({ categories, name, phone }: any) {
   const hotlineNumber = phone || "(12) 345 67895";
 
   return (
-    <div className="flex flex-col md:flex-row items-center gap-4 w-full">
+    <div className="flex flex-col md:flex-row-reverse items-center gap-4 w-full">
       {/* Search Bar */}
       <div className="mx-4">
         <div className="relative flex items-center gap-2">

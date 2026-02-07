@@ -46,9 +46,9 @@ const ProductCard = ({ product }: { product: any }) => {
 
   const getDiscountLabel = () => {
     if (product.discount.type === "flat") {
-      return `৳${product.discount.value} OFF`;
+      return `-৳${product.discount.value}`;
     } else if (product.discount.type === "percentage") {
-      return `${product.discount.value}% OFF`;
+      return `-${product.discount.value}%`;
     }
     return "";
   };
@@ -70,144 +70,121 @@ const ProductCard = ({ product }: { product: any }) => {
   };
 
   return (
-    <div className="group bg-white w-80 overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 relative border border-gray-100">
+    <div className="group bg-white w-80 overflow-hidden hover:shadow-lg transition-all duration-300 relative border border-gray-200">
       {/* Image Container */}
-      <div className="relative overflow-hidden bg-gray-50">
-        {/* Badges */}
-        <div className="absolute top-4 left-4 z-20 flex flex-col gap-2">
-          {hasDiscount && (
-            <span className="bg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg backdrop-blur-sm">
+      <div className="relative overflow-hidden bg-white">
+        {/* Discount Badge */}
+        {hasDiscount && (
+          <div className="absolute top-3 left-3 z-20">
+            <span className="bg-primary text-white text-xs font-semibold px-2.5 py-1 rounded">
               {getDiscountLabel()}
             </span>
-          )}
-          {product.stockQuantity <= 10 && (
-            <span className="bg-orange-500 text-white text-xs font-semibold px-3 py-1.5 rounded-full shadow-lg">
+          </div>
+        )}
+
+        {/* Stock Badge */}
+        {product.stockQuantity <= 10 && (
+          <div className="absolute top-3 right-3 z-20">
+            <span className="bg-orange-500 text-white text-xs font-semibold px-2.5 py-1 rounded">
               Only {product.stockQuantity} left
             </span>
-          )}
-        </div>
-
-        {/* Quick Actions */}
-        <div className="absolute top-4 right-4 z-20 flex flex-col gap-2">
-          <button
-            onClick={() => setIsFavorite(!isFavorite)}
-            className={`p-2.5 rounded-full backdrop-blur-md transition-all duration-300 shadow-lg ${
-              isFavorite
-                ? "bg-red-500 text-white"
-                : "bg-white/90 text-gray-700 hover:bg-red-50"
-            }`}
-          >
-            <Heart
-              className={`w-5 h-5 ${isFavorite ? "fill-current" : ""}`}
-            />
-          </button>
-          <button
-            onClick={handleBuyNow}
-            className="p-2.5 bg-white/90 backdrop-blur-md rounded-full text-gray-700 hover:bg-gray-100 transition-all duration-300 shadow-lg opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0"
-          >
-            <Eye className="w-5 h-5" />
-          </button>
-        </div>
+          </div>
+        )}
 
         {/* Product Image */}
-        <img
-          src={product.thumbnail}
-          alt={product.title}
-          className="w-full h-80 object-cover transition-transform duration-700 group-hover:scale-110"
-        />
-
-        {/* Hover Overlay */}
-        <div
-          className={`absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent transition-opacity duration-500 opacity-0 group-hover:opacity-100 `}
-        />
-      </div>
-
-      {/* Content */}
-      <div className="p-5">
-        {/* Category */}
-        <span className="text-xs font-semibold text-primary uppercase tracking-wider">
-          {product.category}
-        </span>
-
-        {/* Title */}
-        <h3 className="text-gray-900 font-semibold text-lg font-semibold mt-2 mb-1 line-clamp-2 leading-snug min-h-[3rem]">
-          {product.title}
-        </h3>
-
-        <p className="text-sm text-gray-600 my-5">
-          {product.description.slice(0, 100)}...
-        </p>
-
-        {/* Price */}
-        <div className="flex items-baseline gap-2 mb-4">
-          <span className="text-2xl font-bold text-gray-900">
-            ৳{discountedPrice}
-          </span>
-          {hasDiscount && (
-            <>
-              <span className="text-sm text-gray-400 line-through">
-                ৳{product.basePrice}
-              </span>
-              <span className="text-xs font-semibold text-green-600 bg-green-50 px-2 py-0.5 rounded">
-                Save ৳{parseInt(product.basePrice) - discountedPrice}
-              </span>
-            </>
-          )}
-        </div>
-
-        {/* Action Buttons */}
-        <div
-          className={`space-y-2 transition-all duration-500 translate-y-4 opacity-0 h-0 overflow-hidden group-hover:translate-y-0 group-hover:opacity-100 group-hover:h-auto group-hover:duration-500`}
-        >
-          <button
-            onClick={handleBuyNow}
-            className="w-full bg-primary text-white py-3 text-sm font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-[1.02] flex items-center justify-center gap-2"
-          >
-            Order Now
-          </button>
-
-          <div className="grid grid-cols-2 gap-2">
+        <div className="relative">
+          <img
+            src={product.thumbnail}
+            alt={product.title}
+            className="w-full h-80 object-cover"
+          />
+          
+          {/* Hover Overlay with Quick Actions */}
+          <div className="absolute inset-0 bg-white/95 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2">
             <button
-              onClick={handleAddToCart}
-              className="border border-primary text-primary py-2.5 text-xs font-semibold transition-all duration-300 flex items-center justify-center gap-1"
+              onClick={handleBuyNow}
+              className="bg-primary text-white p-3 hover:bg-primary/90 transition-colors shadow-md"
+              title="Quick View"
             >
-              <span>
-                <ShoppingCart className="w-4 h-4" />
-              </span>
-              Add to Cart
+              <Eye className="w-5 h-5" />
+            </button>
+            <button
+              onClick={() => setIsFavorite(!isFavorite)}
+              className={`p-3 transition-colors shadow-md ${
+                isFavorite
+                  ? "bg-red-500 text-white"
+                  : "bg-white text-gray-700 hover:bg-gray-100 border border-gray-200"
+              }`}
+              title="Add to Wishlist"
+            >
+              <Heart
+                className={`w-5 h-5 ${isFavorite ? "fill-current" : ""}`}
+              />
             </button>
             <button
               onClick={() => handleWhatsApp()}
-              className="bg-green-500 text-white py-2.5 text-xs font-semibold hover:bg-green-600 transition-all duration-300 flex items-center justify-center gap-1"
+              className="bg-green-500 text-white p-3 hover:bg-green-600 transition-colors shadow-md"
+              title="WhatsApp"
             >
-              <FaWhatsapp />
-              WhatsApp
+              <FaWhatsapp className="w-5 h-5" />
             </button>
           </div>
         </div>
+
+        {/* Add to Cart Button - Slides up on hover */}
+        <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+          <button
+            onClick={handleAddToCart}
+            className="w-full bg-white border-t border-gray-200 text-gray-900 py-3 text-sm font-semibold hover:bg-primary hover:text-white transition-colors duration-300 flex items-center justify-center gap-2"
+          >
+            <ShoppingCart className="w-4 h-4" />
+            Add to Cart
+          </button>
+        </div>
       </div>
 
-      {/* Stock Indicator */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-100">
-        <div
-          className="h-full bg-primary transition-all duration-700"
-          style={{
-            width: `${Math.min((product.stockQuantity / 50) * 100, 100)}%`,
-          }}
-        />
+      {/* Content */}
+      <div className="p-4 text-center">
+        {/* Category */}
+        <div className="text-xs text-gray-500 uppercase tracking-wide mb-2">
+          {product.category}
+        </div>
+
+        {/* Title */}
+        <h3 className="text-gray-900 font-medium text-base mb-3 line-clamp-2 leading-snug min-h-[2.5rem] hover:text-primary transition-colors cursor-pointer">
+          {product.title}
+        </h3>
+
+        {/* Price */}
+        <div className="flex items-center justify-center gap-2 mb-3">
+          <span className="text-xl font-bold text-gray-900">
+            ৳{discountedPrice}
+          </span>
+          {hasDiscount && (
+            <span className="text-sm text-gray-400 line-through">
+              ৳{product.basePrice}
+            </span>
+          )}
+        </div>
+
+        {/* Buy Now Button - Always visible */}
+        <button
+          onClick={handleBuyNow}
+          className="w-full bg-primary text-white py-2.5 text-sm font-semibold hover:bg-primary/90 transition-colors duration-300"
+        >
+          Order Now
+        </button>
       </div>
 
       {isCartModalOpen &&
         createPortal(
-          // <AddToCartModal product={product} onClose={closeModal} />
-
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-            <div className="bg-white rounded-xl w-full max-w-md p-6 relative">
+            <div className="bg-white rounded w-full max-w-md p-6 relative">
               <button
                 onClick={() => setIsCartModalOpen(false)}
-                className="absolute top-3 right-3 text-gray-500 hover:text-black"
+                className="absolute top-3 right-3 text-gray-500 hover:text-black text-2xl leading-none"
               >
-                ✕
+                ×
               </button>
 
               <h2 className="text-lg font-semibold mb-2">

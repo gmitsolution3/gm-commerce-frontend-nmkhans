@@ -29,7 +29,6 @@ const MainPage = async () => {
   const secondSlider =
     [
       { id: "side-1", images: toArray(secondBanner) },
-      { id: "side-2", images: toArray(thirdBanner) },
     ].flat() || [];
 
   const mainSlider = { id: "main", images: toArray(mainBanner) };

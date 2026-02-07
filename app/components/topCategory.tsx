@@ -49,7 +49,7 @@ export const TopCategories = ({ categories }: TopCategoriesProps) => {
           No Category found
         </div>
       ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <div className="flex gap-4">
           {categories.slice(0, 5).sort((a, b) => a.order - b.order).map((cat, index) => {
             // Pick a random icon for each category (based on index to keep consistent)
             const IconComponent = iconList[index % iconList.length];
@@ -58,7 +58,7 @@ export const TopCategories = ({ categories }: TopCategoriesProps) => {
               <Link
                 href={`/shop/${cat._id}`}
                 key={cat._id}
-                className={`${index === 0 ? "row-span-2 col-span-3" : ""} h-full`}
+                className={`h-full`}
               >
                 <div
                   key={cat._id}
@@ -75,7 +75,7 @@ export const TopCategories = ({ categories }: TopCategoriesProps) => {
                         priority
                         width={300}
                         height={300}
-                        className="w-full object-cover group-hover:scale-[110%] duration-300"
+                        className="w-[600px] h-[300px] object-cover group-hover:scale-[110%] duration-300"
                       />
                     </div>
                   ) : (
@@ -88,7 +88,7 @@ export const TopCategories = ({ categories }: TopCategoriesProps) => {
                   )}
 
                   {/* Name */}
-                  <span className="text-xl font-medium text-gray-900 uppercase absolute bottom-10 left-10">
+                  <span className="text-sm font-medium text-white bg-primary shadow rounded-full p-2 uppercase absolute bottom-10 left-10">
                     {cat.name}
                   </span>
                 </div>

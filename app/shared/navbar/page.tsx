@@ -9,11 +9,10 @@ import Link from "next/link";
 import { NavBarMenu } from "../components/navBarMenu";
 import AccountDropdown from "../components/AccountDropdown";
 
-
 const Navbar = async () => {
   const getAllCategories = await getCategories();
   const brandInfoRaw = await getBrandInfo();
-  const marqueeText = await getMarquee()
+  const marqueeText = await getMarquee();
 
   const brandInfo = {
     logo: brandInfoRaw?.data?.logo ?? "/placeholder.svg",
@@ -25,20 +24,11 @@ const Navbar = async () => {
   return (
     <header className="w-full bg-white">
       <div className="max-w-full bg-white">
-        <div className="border-b border-gray-100 bg-linear-to-r from-primary-foreground to-primary ">
-          <div className="h-14 max-w-400 mx-auto px-4 flex justify-between items-center text-white">
-            <h5>Welcome to our website</h5>
-            <div>
-              <NavBarMenu />
-            </div>
-            <div className="block md:hidden">
-              <AccountDropdown />
-            </div>
-          </div>
-        </div>
         <div className="border-b border-gray-300">
-          <div className="max-w-7xl mx-auto px-4 flex flex-row gap-4 lg:gap-0 justify-between items-center py-5">
+          <div className="text-center mx-auto">
             <ComLogo />
+          </div>
+          <div className="max-w-7xl mx-auto px-4 flex flex-row gap-4 lg:gap-0 justify-between items-center py-5">
             <div className="hidden md:block">
               <HeaderSearchBar
                 categories={getAllCategories.data}
@@ -46,14 +36,22 @@ const Navbar = async () => {
                 phone={brandInfo.phone}
               />
             </div>
-            <BookCard />
+            <div className="flex items-center gap-x-5">
+              <BookCard />
+              <div>
+                <NavBarMenu />
+              </div>
+              <div className="block md:hidden">
+                <AccountDropdown />
+              </div>
+            </div>
           </div>
         </div>
         <div className="bg-white border-b border-gray-300 shadow-md">
           <MenuNavbar categories={getAllCategories.data} />
         </div>
         <div className="bg-white border-b border-gray-300 shadow-md">
-          <MarqueeText text={marqueeText.data.text}/>
+          <MarqueeText text={marqueeText.data.text} />
         </div>
       </div>
     </header>

@@ -6,16 +6,15 @@ export const ComLogo =async () => {
 
    const brandInfoRaw = await getBrandInfo();
 
-
-
   return (
-    <Link href="/">
+    <Link href="/" className="inline-block">
       <div className="hover:cursor-pointer">
         <Image
           src={brandInfoRaw?.data?.logo || "/placeholder.svg"}
           alt={brandInfoRaw?.data?.name || "Crab fashion"}
-          width={79}
-          height={66}
+          width={150}
+          height={150}
+          className="w-32"
         />
       </div>
     </Link>

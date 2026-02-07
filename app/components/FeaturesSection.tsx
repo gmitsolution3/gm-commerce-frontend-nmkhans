@@ -30,37 +30,36 @@ const features = [
 
 export const FeaturesSection = () => {
   return (
-    <section className="py-12 px-4">
+    <section className="py-12 px-4 bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {features.map((feature, idx) => {
-            const Icon = feature.icon;
-            return (
-              <div
-                key={idx}
-                className="group relative bg-white rounded-2xl p-6 hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-transparent overflow-hidden"
-              >
-                {/* Background Gradient on Hover */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
-                
-                {/* Content */}
-                <div className="relative">
-                  {/* Icon */}
-                  <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
-                    <Icon className="w-6 h-6 text-white" strokeWidth={2.5} />
+        <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:divide-x divide-gray-100">
+            {features.map((feature, idx) => {
+              const Icon = feature.icon;
+              return (
+                <div
+                  key={idx}
+                  className="group flex flex-col items-center text-center lg:px-6 hover:scale-105 transition-transform duration-300"
+                >
+                  {/* Icon Circle */}
+                  <div className="relative mb-4">
+                    <div className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} blur-xl opacity-40 group-hover:opacity-60 transition-opacity duration-300`} />
+                    <div className={`relative w-16 h-16 rounded-full bg-gradient-to-br ${feature.gradient} flex items-center justify-center shadow-lg group-hover:shadow-2xl transition-shadow duration-300`}>
+                      <Icon className="w-8 h-8 text-white" strokeWidth={2} />
+                    </div>
                   </div>
 
                   {/* Text */}
-                  <h3 className="font-semibold text-gray-900 mb-1 text-sm lg:text-base">
+                  <h3 className="font-bold text-gray-900 mb-1 text-sm lg:text-base">
                     {feature.title}
                   </h3>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-gray-500 leading-relaxed">
                     {feature.description}
                   </p>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
