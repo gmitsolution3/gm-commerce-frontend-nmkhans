@@ -20,6 +20,11 @@ interface Seo {
 }
 
 export interface ProductFormData {
+  dimensions: string;
+  weight: string;
+  material: string;
+  videoThumbnail: File | null;
+  videoUrl: any;
   _id?: string;
   title: string;
   slug: string;

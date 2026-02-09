@@ -22,16 +22,16 @@ export const NavBarMenu = () => {
         <>
           <Link
             href="/auth/sign-in"
-            className="hover:cursor-pointer px-3 py-2 border font-bold border-secondary rounded-lg hover:bg-secondary hover:text-primary"
+            className="font-medium bg-primary text-white rounded-lg p-2 px-5 "
           >
-            Log in
+            Login
           </Link>
-          <h5 className="hover:cursor-pointer px-3 py-2 border font-bold border-secondary rounded-lg hover:bg-white hover:text-primary">
+          <Link
+            href="/order-tracking"
+            className="font-medium bg-primary text-white rounded-lg p-2 px-5"
+          >
             Order Tracking
-          </h5>
-          <h5 className="hover:cursor-pointer px-3 py-2 border font-bold border-secondary rounded-lg hover:bg-white hover:text-primary">
-            Return Policy
-          </h5>
+          </Link>
         </>
       ) : (
         <div className="relative">
@@ -47,31 +47,37 @@ export const NavBarMenu = () => {
           {/* Dropdown menu */}
           {dropdownOpen && (
             <div
-              className="absolute right-0 mt-4 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-50"
+              className="absolute right-0 mt-4 w-48 bg-white border border-gray-200 rounded-lg shadow-xl z-50 overflow-hidden py-2"
               onMouseEnter={() => setDropdownOpen(true)}
               onMouseLeave={() => setDropdownOpen(false)}
             >
               <Link
                 href="/profile"
-                className="block px-4 py-2 text-gray-700 hover:bg-primary hover:text-white hover:cursor-pointer"
+                className="group relative block px-4 py-2.5 text-gray-700 hover:text-primary transition-colors duration-200 text-center"
               >
                 Profile
+                <span className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-primary group-hover:w-20 transition-all duration-300"></span>
               </Link>
+
               <Link
                 href="/order-tracking"
-                className="block px-4 py-2 text-gray-700 hover:bg-primary hover:text-white hover:cursor-pointer"
+                className="group relative block px-4 py-2.5 text-gray-700 hover:text-primary transition-colors duration-200 text-center"
               >
-               Order Tracking
+                Order Tracking
+                <span className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-primary group-hover:w-20 transition-all duration-300"></span>
               </Link>
-              <h5 className="block px-4 py-2 text-gray-700 hover:bg-primary hover:text-white hover:cursor-pointer">
+
+              <h5 className="group relative block px-4 py-2.5 text-gray-700 hover:text-primary transition-colors duration-200 cursor-pointer text-center">
                 Return Policy
+                <span className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-primary group-hover:w-20 transition-all duration-300"></span>
               </h5>
 
               <button
                 onClick={handleLogout}
-                className="w-full text-left px-4 py-2 text-gray-700 hover:bg-primary hover:text-white hover:cursor-pointer border-t border-gray-300"
+                className="group relative w-full px-4 py-2.5 text-gray-700 hover:text-primary transition-colors duration-200 border-t border-gray-100 mt-1 text-center mx-auto"
               >
                 Logout
+                <span className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-primary group-hover:w-20 transition-all duration-300"></span>
               </button>
             </div>
           )}

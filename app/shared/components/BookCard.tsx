@@ -23,9 +23,12 @@ export const BookCard = () => {
   }, []);
   return (
     <Link href={`/checkoutCart`}>
-      <div className="border border-gray-300 rounded-md bg-[#FEE2E2] px-3 py-2 flex gap-2">
-        <ShoppingCart className="text-red-600" />{" "}
-        <span className="text-red-600">{cartCount}</span>
+      <div className="flex gap-2 w-12">
+        <div className="relative">
+        <ShoppingCart className="text-gray-600" />{" "}
+        <span className="bg-primary text-white rounded-full h-5 w-5 text-center font-medium leading-5 absolute -top-2 -right-2">{cartCount}</span>
+
+        </div>
       </div>
     </Link>
   );

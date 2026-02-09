@@ -1,14 +1,19 @@
+"use client";
+
 import React, { useState } from "react";
 import { ShoppingCart, Heart, Eye } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { handleWhatsApp } from "./../(public)/shop/components/handleWhatsApp";
 import { createPortal } from "react-dom";
 import ProductVariant from "./../(public)/shop/components/ProductVariants";
+import { useRouter } from "next/navigation";
 
 const ProductCard = ({ product }: { product: any }) => {
   const [isCartModalOpen, setIsCartModalOpen] = useState(false);
   const [isBuyNow, setIsBuyNow] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+
+  const router = useRouter();
 
   const from = "cardButton";
 
@@ -69,8 +74,12 @@ const ProductCard = ({ product }: { product: any }) => {
     setIsBuyNow(true);
   };
 
+  const handleViewDetail = () => {
+    router.push(`/shop/${product.categoryId}/${product.slug}`);
+  }
+
   return (
-    <div className="group bg-white w-80 overflow-hidden hover:shadow-lg transition-all duration-300 relative border border-gray-200">
+    <div className="group bg-white overflow-hidden hover:shadow-lg transition-all duration-300 relative border border-gray-200">
       {/* Image Container */}
       <div className="relative overflow-hidden bg-white">
         {/* Discount Badge */}
@@ -98,11 +107,11 @@ const ProductCard = ({ product }: { product: any }) => {
             alt={product.title}
             className="w-full h-80 object-cover"
           />
-          
+
           {/* Hover Overlay with Quick Actions */}
           <div className="absolute inset-0 bg-white/95 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-2">
             <button
-              onClick={handleBuyNow}
+              onClick={handleViewDetail}
               className="bg-primary text-white p-3 hover:bg-primary/90 transition-colors shadow-md"
               title="Quick View"
             >

@@ -6,9 +6,14 @@ import { useState } from "react";
 import { ChevronDown, ChevronUp, Search, Phone } from "lucide-react"; // optional: lucide icons
 import Link from "next/link";
 
-export default function HeaderSearchBar({ categories, name, phone }: any) {
+export default function HeaderSearchBar({
+  categories,
+  name,
+  phone,
+}: any) {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectCategory, setSelectCategory] = useState<string>("Categories");
+  const [selectCategory, setSelectCategory] =
+    useState<string>("Categories");
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -75,22 +80,37 @@ export default function HeaderSearchBar({ categories, name, phone }: any) {
       </div>
 
       {/* Call Us Now */}
-      <div className="flex items-center space-x-2 ml-3 md:ml-8 lg:ml-11">
-        <div className="p-3 rounded-full bg-gray-100">
+      <div className="flex items-center space-x-3 ml-3 md:ml-8 lg:ml-11 group">
+        <a
+          href="tel:${hotlineNumber}"
+          aria-label="Call our hotline at ${hotlineNumber}"
+          className="flex items-center justify-center p-2.5 rounded-lg bg-white/80 backdrop-blur-sm border border-gray-200/50 hover:border-primary/20 hover:bg-primary/5 transition-all duration-300"
+        >
+          <svg
+            className="w-4.5 h-4.5 text-gray-600 group-hover:text-primary transition-colors duration-300"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
+            />
+          </svg>
+        </a>
+
+        <div className="leading-tight">
+          <div className="text-xs text-gray-500 font-medium tracking-tight mb-0.5">
+            {name} Support
+          </div>
           <a
             href={`tel:${hotlineNumber}`}
             aria-label={`Call our hotline at ${hotlineNumber}`}
+            className="text-sm md:text-base font-medium text-gray-900 hover:text-primary transition-colors duration-200"
           >
-            <Phone className="w-5 h-5 text-primary" />
-          </a>
-        </div>
-        <div className="text-sm md:text-lg font-medium text-gray-800">
-          {`${name} Hotline`} <br />
-          <a
-            href={`tel:${hotlineNumber}`}
-            aria-label={`Call our hotline at ${hotlineNumber}`}
-          >
-            <span className="text-primary">{phone}</span>
+            {phone}
           </a>
         </div>
       </div>
