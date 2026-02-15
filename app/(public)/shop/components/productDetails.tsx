@@ -237,7 +237,7 @@ export const ProductDetail = ({ product }: ProductDetailsProps) => {
         </div>
 
         {/* Video Section - Optional */}
-        {product.videoUrl && (
+        {/* {product.videoUrl && (
           <div className="mt-12">
             <h2 className="text-2xl font-bold text-gray-900 mb-8">
               Product Video
@@ -251,7 +251,7 @@ export const ProductDetail = ({ product }: ProductDetailsProps) => {
               />
             </div>
           </div>
-        )}
+        )} */}
 
         {/* Additional Information Tabs - You can expand this section */}
         <div className="mt-12 border-t border-gray-200 pt-12">

@@ -51,7 +51,7 @@ const Navbar = async () => {
           <MenuNavbar categories={getAllCategories.data} />
         </div>
         <div className="bg-white border-b border-gray-300 shadow-md">
-          <MarqueeText text={marqueeText.data.text} />
+          <MarqueeText text={marqueeText?.data?.text} />
         </div>
       </div>
     </header>
